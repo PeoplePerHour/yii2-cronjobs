@@ -3,10 +3,12 @@ Yii2 cronjobs extension
 Easiest way to put crontab on your console scripts.
 
 This extension is based on [this](https://github.com/Yiivgeny/Yii-PHPDocCrontab).
-Thanks [Yiivgeny](https://github.com/Yiivgeny).
+Thanks [Yiivgeny](https://github.com/Yiivgeny)
+
+and for yii2 is based on [this](https://github.com/DenisOgr/yii2-cronjobs).
 
 But with a few changes:
-- Work eith yii2
+- Work with yii2
 - Set config in params (not in phpDocs).
 
 I transfer ​​settings of crontab in local settings(params) configuration, so that the application can be run on different servers with different sets of crontab.
@@ -19,13 +21,13 @@ Installation
 Either run
 
 ```
-php composer.phar require --prefer-dist denisogr/yii2-cronjobs "dev-master"
+php composer.phar require --prefer-dist peopleperhour/yii2-cronjobs "dev-master"
 ```
 
 or add
 
 ```
-"denisogr/yii2-cronjobs": "dev-master"
+"peopleperhour/yii2-cronjobs": "dev-master"
 ```
 
 to the require section of your `composer.json` file.
@@ -38,31 +40,86 @@ Yii::setAlias('@runnerScript', dirname(dirname(dirname(__FILE__))) .'/yii');
 ```
 'controllerMap' => [
        'cron' => [
-           'class' => 'denisog\cronjobs\CronController'
+           'class' => 'peopleperhour\cronjobs\CronController'
        ],
    ],
 ```
 - **Step 4:**  Add task to system scheduler (cron on unix, task scheduler on windows) to run every minute:
 
 ```sh
-* * * * * /path/to/yii/application/protected/yiic cron
+* * * * * /path/to/yii/application/protected/yii cron
 ```
 Usage
 -----
 
 Add in params array with cron sets:
 ```
-'cronJobs' =>[
-        'test/example1' => [
-            'cron'      => '* * * * *',            
-        ],
-	'test/example2' => [
-            'cron'      => '10 * * * *',            
-        ],
+'params' => [
+  'test/example1' => [
+    'cron'      => '* * * * *',            
+  ],
+  'test/example2' => [
+    'cron'      => '10 * * * *',            
+  ],
+],
+```
+- **Step 5:** Add logging
 
-    ],
+You can add info about logging in the controllerMap cron config as well as on each cron configuration.
+
+In the controllerMap you can add the logFileName variable as well as the up[dateLogFile. In the cron config you can add stdout and stderr.
+
+Usage
+----
+```
+'params' => [
+  'test/example1' => [
+    'cron'        => '* * * * *',
+    'cron-stdout' => 'example1-out',
+    'cron-stderr' => 'example1-err'
+  ],
+  'test/example2' => [
+    'cron'      => '10 * * * *',            
+  ],
+],
 ```
 
-You can point any settings from [this](https://github.com/Yiivgeny/Yii-PHPDocCrontab/blob/master/examples/ExampleRuCommand.php).
+and you can also add to the controllerMap
 
+Usage
+----
+```
+'controllerMap' => [
+  'cron' => [
+   'class' => 'peopleperhour\cronjobs\CronController'
+   'logFileName'    => '/cron-output.log',
+   'updateLogFile'  => true    
+  ],
+],
+```
+
+- **Step 6:** Add tags to run on specific environments
+
+Should you need to separate environments when running your crons you can add a cron-tags parameter to the cron config
+
+Usage
+----
+```
+'params' => [
+  'test/example1' => [
+    'cron'        => '* * * * *',
+    'cron-stdout' => 'example1-out',
+    'cron-stderr' => 'example1-err'
+    'cron-tags'   => 'live staging'
+  ],
+],
+```
+
+Then run your cron command with the tag requested inside your scheduler
+
+eg
+
+```sh
+* * * * * /path/to/yii/application/protected/yii cron live
+```
 
