@@ -217,8 +217,15 @@ RAW;
      * @param array $args List of run-tags to running actions (if empty, only "default" run-tag will be runned).
      */
     public function actionRun($args = array()){
-        $tags = &$args;
+
+        //always run default values
         $tags[] = 'default';
+
+        //if we have specified args in input (cron-tags) insert them in array
+        if (!empty($args)){
+            $tags[] = &$args;
+         }
+
         //Getting timestamp will be used as current
         $time = strtotime($this->timestamp);
         if ($time === false) throw new CException('Bad timestamp format');
