@@ -49,8 +49,6 @@ Yii::setAlias('@runnerScript', dirname(dirname(dirname(__FILE__))) .'/yii');
 ```sh
 * * * * * /path/to/yii/application/protected/yii cron
 ```
-Usage
------
 
 Add in params array with cron sets:
 ```
@@ -69,8 +67,7 @@ You can add info about logging in the controllerMap cron config as well as on ea
 
 In the controllerMap you can add the logFileName variable as well as the up[dateLogFile. In the cron config you can add stdout and stderr.
 
-Usage
-----
+
 ```
 'params' => [
   'test/example1' => [
@@ -86,8 +83,7 @@ Usage
 
 and you can also add to the controllerMap
 
-Usage
-----
+
 ```
 'controllerMap' => [
   'cron' => [
@@ -102,8 +98,6 @@ Usage
 
 Should you need to separate environments when running your crons you can add a cron-tags parameter to the cron config
 
-Usage
-----
 ```
 'params' => [
   'test/example1' => [
