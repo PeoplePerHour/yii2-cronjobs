@@ -1,11 +1,6 @@
 <?php
-/**
- * User: Denis Porplenko <denis.porplenko@gmail.com>
- * Date: 16.07.14
- * Time: 14:51
- */
 
-namespace denisog\cronjobs;
+namespace peopleperhour\cronjobs;
 
 use Yii;
 use yii\console\Controller;
