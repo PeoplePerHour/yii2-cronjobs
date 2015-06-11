@@ -63,10 +63,68 @@ Add in params array with cron sets:
 ```
 - **Step 5:** Add logging
 
-You can add info about logging in the controllerMap cron config as well as on each cron configuration.
+There are two levels of logging provided.
 
-In the controllerMap you can add the logFileName variable as well as the up[dateLogFile. In the cron config you can add stdout and stderr.
+a) Log the output of the cron mechanism
 
+Logs events coming into the cron mechanism.
+
+Sample Output:
+
+2015-06-11 09:48:36 [-][-][-][info][cronjobs] Running task [1]: runtestcron test
+    in /var/www/vendor/peopleperhour/yii2-cronjobs/CronController.php:260
+2015-06-11 09:48:36 [-][-][-][info][cronjobs] Runned 1 task(s) at Thu, 11 Jun 2015 09:48:36 +0000
+    in /var/www/vendor/peopleperhour/yii2-cronjobs/CronController.php:264
+
+Set up:
+
+In your config, set the below in your log component:
+
+```
+'components' => [
+  'log' => [
+    'targets' => [
+      [
+        'class'         => 'yii\log\FileTarget',
+        'logFile'       => 'somelogfile.log',
+        'categories'    => ['yii2-cronjobs']
+      ],
+    ],
+  ],
+]
+```
+
+The "categories" element is the default category used in the peopleperhour/yii2-cronjobs extension. If you want to change it then enter the name desired above and also set the logsCategory field in the controllerMap.
+
+eg.
+
+```
+'controllerMap' => [
+       'cron' => [
+           'class'        => 'peopleperhour\cronjobs\CronController',
+           'logsCategory' => 'somenewcategory',
+       ],
+   ],
+```
+
+b) Log the output of commands running
+
+There are two ways to log the output of the commands running. 
+
+First is the catchall way, where you add the filename to your controllerMap.
+
+eg
+
+```
+'controllerMap' => [
+       'cron' => [
+           'class'        => 'peopleperhour\cronjobs\CronController',
+           'logFileName'  => 'somelog',
+       ],
+   ],
+```
+
+Secondly you can specify the output of each cron command specifically by changing the cron specification using the "cron-stdout" directive.
 
 ```
 'params' => [
@@ -81,18 +139,7 @@ In the controllerMap you can add the logFileName variable as well as the up[date
 ],
 ```
 
-and you can also add to the controllerMap
-
-
-```
-'controllerMap' => [
-  'cron' => [
-   'class' => 'peopleperhour\cronjobs\CronController'
-   'logFileName'    => '/cron-output.log',
-   'updateLogFile'  => true    
-  ],
-],
-```
+The above will overwrite the catchall output of the controllerMap and send the output to the cron-stdout specified log file.
 
 - **Step 6:** Add tags to run on specific environments
 
