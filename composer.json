@@ -1,22 +1,23 @@
 {
-	"name": "denisogr/yii2-cronjobs",
-	"description": "cronjobs",
+	"name": "peopleperhour/yii2-cronjobs",
+	"description": "cronjobs scheduler for yii2",
 	"type": "yii2-extension",
 	"keywords": ["yii2","extension","cronjobs"],
+    "homepage": "https://github.com/peopleperhour/yii2-cronjobs",
 	"license": "BSD-3-Clause",
 	"authors": [
 		{
-			"name": "Denis Porplenko",
-			"email": "denis.porplenko@gmail.com"
+			"name":  "Spyros Lambrinidis",
+			"homepage": "http://www.peopleperhour.com"
 		}
 	],
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"require": {
         	"yiisoft/yii2": "*"
     	},
 	"autoload": {
 		"psr-4": {
-			"denisog\\cronjobs\\": ""
+			"peopleperhour\\cronjobs\\": ""
 		}
 	}
 }
