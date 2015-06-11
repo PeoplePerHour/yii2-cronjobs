@@ -2,16 +2,11 @@ Yii2 cronjobs extension
 ========
 Easiest way to put crontab on your console scripts.
 
-This extension is based on [this](https://github.com/Yiivgeny/Yii-PHPDocCrontab).
-Thanks [Yiivgeny](https://github.com/Yiivgeny)
+This extension is based on [this repo](https://github.com/Yiivgeny/Yii-PHPDocCrontab) for yii1 and [this](https://github.com/DenisOgr/yii2-cronjobs) for yii2.
 
-and for yii2 is based on [this](https://github.com/DenisOgr/yii2-cronjobs).
-
-But with a few changes:
-- Work with yii2
-- Set config in params (not in phpDocs).
-
-I transfer ​​settings of crontab in local settings(params) configuration, so that the application can be run on different servers with different sets of crontab.
+The peopleperhour package adds some more features such as
+1) extra logging
+2) correct cron-tags functionality
 
 Installation
 ------------
