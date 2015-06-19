@@ -39,7 +39,7 @@ Yii::setAlias('@runnerScript', dirname(dirname(dirname(__FILE__))) .'/yii');
        ],
    ],
 ```
-- **Step 4:**  Add task to system scheduler (cron on unix, task scheduler on windows) to run every minute:
+- **Step 4:**  Add task to system scheduler (cron on unix, task scheduler on windows, systemd service) to run every minute:
 
 ```sh
 * * * * * /path/to/yii/application/protected/yii cron
