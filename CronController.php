@@ -127,7 +127,7 @@ RAW;
             array(0,6),  //Weekdays
         );
         foreach ($parameters AS $n => &$repeat) {
-            list($repeat, $every) = explode('\\', $repeat, 2) + array(false, 1);
+            list($repeat, $every) = explode('/', $repeat, 2) + array(false, 1);
             if ($repeat === '*') $repeat = range($dimensions[$n][0], $dimensions[$n][1]);
             else {
                 $repeatPiece = array();
